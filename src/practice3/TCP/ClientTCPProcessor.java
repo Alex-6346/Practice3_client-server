@@ -33,7 +33,7 @@ public class ClientTCPProcessor extends Thread{
             {
                 byte[] bytes= Main.encodePackage(responsePacket);
                 socket.getOutputStream().write(bytes);
-                socket.shutdownOutput();
+                //socket.shutdownOutput();
             }
             catch (Exception e)
             {

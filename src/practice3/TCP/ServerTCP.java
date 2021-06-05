@@ -31,10 +31,13 @@ public class ServerTCP {
         {
             try
             {
+
                 Socket clientSocket= serverSocket.accept();
                 if(clientSocket.isConnected())
                 {
-                    Packet packet= Main.decodePackage(clientSocket.getInputStream().readAllBytes());
+                    byte[] bytes = new byte[1000];
+                    clientSocket.getInputStream().read(bytes);
+                    Packet packet= Main.decodePackage(bytes);
                     clientMap.computeIfAbsent(packet.getClient(), ClientTCPProcessor::new).acceptPacket(clientSocket,packet);
                 }
 

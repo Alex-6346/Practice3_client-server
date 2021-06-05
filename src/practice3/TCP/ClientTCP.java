@@ -29,7 +29,7 @@ public class ClientTCP implements Client {
 
             socket.getOutputStream().write(encodePackage);
             socket.getOutputStream().flush();
-            socket.shutdownOutput();
+            //socket.shutdownOutput();
         }
         catch (IOException e){
             e.printStackTrace();
@@ -38,9 +38,9 @@ public class ClientTCP implements Client {
 
     @Override
     public Packet receive() {
-        byte[] bytes = new byte[0];
+        byte[] bytes = new byte[1000];
         try {
-            bytes = socket.getInputStream().readAllBytes();
+            socket.getInputStream().read(bytes);
         }
         catch (IOException e){
             e.printStackTrace();
